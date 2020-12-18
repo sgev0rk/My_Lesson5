@@ -7,7 +7,15 @@ class Person(
     var children: List<Person> = listOf<Person>(),
     var checkedPerson: Boolean = false
 ) {
-
+    init{
+        if (this.father != null && this.mother == null){
+            this.father!!.children = this.father!!.children.plus(this)
+        } else if (this.father == null && this.mother != null){
+            this.mother!!.children = this.mother!!.children.plus(this)
+        } else if (this.father != null && this.mother != null){
+            this.mother!!.children = this.mother!!.children.plus(this)
+            this.father!!.children = this.father!!.children.plus(this)}
+    }
 
     fun allRelatives(): HashSet<Person> {
         var newMembers: HashSet<Person> = hashSetOf()
